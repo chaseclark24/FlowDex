@@ -10,9 +10,72 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="c:\users\chase\documents\github\flowdex\scriptHome.js"></script>
+<script>
+	
+
+fetch('https://statsapi.web.nhl.com/api/v1/teams/')
+.then(response => {
+    return response.json().then(data => data.teams);
+}).then(teams => {
+      for(team of teams) {
+         div = document.createElement("div");
+         div.innerHTML='<a href="javascript:generateRoster(' + team.id + ');" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + team.name + '</span></a>'
+         document.getElementById("teamList").appendChild(div); 
+      }
+});
+
+
+
+
+
+function generateRoster(teamID){
+
+	var teamList2 = document.getElementById("teamList");
+	teamList2.style.display='none';
+
+	url = 'https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster'
+
+	fetch(url)
+	.then(response => {
+	    return response.json().then(data => data.teams[0].roster.roster);
+	}).then(teams => {
+	      for(team of teams) {
+	         const {jerseyNumber, person:{fullName, link}, position:{name}} = team;
+
+	         fetch('https://statsapi.web.nhl.com' + link)
+	            .then(res => {
+	                return res.json().then(data => data.people[0]);
+	            }).then(people => {
+	               const {currentAge, height, weight, nationality} = people;
+
+	               div = document.createElement("div");
+	               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-info">' + jerseyNumber + '</span></a>'
+	               div.innerHTML=div.innerHTML + '<div id="sm" class="sublinks collapse">'
+	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a>'
+	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a>'
+	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Weight: ' + weight + ' </a>'
+	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' +  'Nationality: '+ nationality + ' </a>'
+	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Position: ' + name + ' </a> </div>'
+	               document.getElementById("main").appendChild(div);
+	            });
+	      }
+	});
+
+
+
+
+
+
+};
+
+</script>
+
+
+<div class="panel list-group">
+	<div id ="teamList" class="teamList">
+</div>
+
 
 <div class="panel list-group">
 	<div id ="main" class="main">
-
-	</div>
+</div>
