@@ -27,7 +27,8 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 	            }).then(teamStats => {
 	               console.log(JSON.stringify(teamStats.stat.wins))
 	                div = document.createElement("div");
-         div.innerHTML='<a href="javascript:generateRoster(' + id + ');" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a>'
+	                url = "./dexCheck.html?" + id
+         div.innerHTML='<a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a>'
          document.getElementById("teamList").appendChild(div); 
 
 	            })
@@ -39,59 +40,6 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 
 
 
-//once a team is selected, generate roster data
-function generateRoster(teamID){
-		var playerList = document.getElementById("main");
-	playerList.style.display='block';
-	var teamList2 = document.getElementById("teamList");
-	teamList2.style.display='none';
-
-	url = 'https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster'
-
-	fetch(url)
-	.then(response => {
-	    return response.json().then(data => data.teams[0].roster.roster);
-	}).then(teams => {
-
-	      div = document.createElement("div");
-	      div.innerHTML=div.innerHTML + '<a href="javascript:hideRoster();" class="list-group-item small"></span><span class="glyphicon glyphicon-chevron-left"></span>' + 'go back  </a>'
-	      document.getElementById("main").appendChild(div);
-
-	      for(team of teams) {
-	         const {jerseyNumber, person:{fullName, link}, position:{name}} = team;
-
-	         fetch('https://statsapi.web.nhl.com' + link)
-	            .then(res => {
-	                return res.json().then(data => data.people[0]);
-	            }).then(people => {
-	               const {currentAge, height, weight, nationality} = people;
-
-	               div = document.createElement("div");
-	               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-default">' + jerseyNumber + '</span></a>'
-	               div.innerHTML=div.innerHTML + '<div id="sm" class="sublinks collapse">'
-	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a>'
-	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a>'
-	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Weight: ' + weight + ' </a>'
-	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' +  'Nationality: '+ nationality + ' </a>'
-	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Position: ' + name + ' </a> </div>'
-	               document.getElementById("main").appendChild(div);
-	            });
-	      }
-
-
-	});
-
-};
-
-
-function hideRoster(){
-	var playerList = document.getElementById("main");
-	playerList.innerHTML="";
-	var teamList = document.getElementById("teamList");
-	teamList.style.display='block';
-	};
-
-
 </script>
 
 
@@ -100,6 +48,3 @@ function hideRoster(){
 </div>
 
 
-<div class="panel list-group">
-	<div id ="main" class="main">
-</div>

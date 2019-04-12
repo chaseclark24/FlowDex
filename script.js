@@ -1,4 +1,7 @@
-fetch('https://statsapi.web.nhl.com/api/v1/teams/14?expand=team.roster')
+        var path = window.location.href;
+        var teamID = path.split("?")[1]
+
+fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
 .then(response => {
     return response.json().then(data => data.teams[0].roster.roster);
 }).then(teams => {
@@ -14,7 +17,7 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/14?expand=team.roster')
                // Rest of the code. Create div elements.. 
               // console.log(`Age: ${currentAge}, Height: ${height}, Weight: ${weight}, Nationality: ${nationality}, Num: ${jerseyNumber}, Name: ${fullName}, Position: ${name}`);
                div = document.createElement("div");
-               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-info">' + jerseyNumber + '</span></a>'
+               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-default">' + jerseyNumber + '</span></a>'
                div.innerHTML=div.innerHTML + '<div id="sm" class="sublinks collapse">'
                div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a>'
                div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a>'
