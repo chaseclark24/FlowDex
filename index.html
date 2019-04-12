@@ -2,14 +2,10 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
 
 //request data for team listing
@@ -25,11 +21,11 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 	            .then(res => {
 	                return res.json().then(data => data.stats[0].splits[0]);
 	            }).then(teamStats => {
-	               console.log(JSON.stringify(teamStats.stat.wins))
+	               //console.log(JSON.stringify(teamStats.stat.wins))
 	                div = document.createElement("div");
 	                url = "./dexCheck.html?" + id
-         div.innerHTML='<a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a>'
-         document.getElementById("teamList").appendChild(div); 
+         			div.innerHTML='<a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span align="right" class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a>'
+         			document.getElementById("teamList").appendChild(div); 
 
 	            })
 
@@ -41,6 +37,9 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 
 
 </script>
+
+
+
 
 
 <div class="panel list-group">
