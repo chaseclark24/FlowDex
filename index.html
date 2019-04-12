@@ -57,7 +57,7 @@ function generateRoster(teamID){
 	               const {currentAge, height, weight, nationality} = people;
 
 	               div = document.createElement("div");
-	               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-info">' + jerseyNumber + '</span></a>'
+	               div.innerHTML='<a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + fullName + ' <span class="label label-default">' + jerseyNumber + '</span></a>'
 	               div.innerHTML=div.innerHTML + '<div id="sm" class="sublinks collapse">'
 	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a>'
 	               div.innerHTML=div.innerHTML + '<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a>'
