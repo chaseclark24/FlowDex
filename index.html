@@ -11,25 +11,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script>
-	
 
+//request data for team listing
 fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 .then(response => {
     return response.json().then(data => data.teams);
 }).then(teams => {
       for(team of teams) {
+      	var teamList2 = document.getElementById("teamList");
+		teamList2.style.display='block';
          div = document.createElement("div");
          div.innerHTML='<a href="javascript:generateRoster(' + team.id + ');" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + team.name + '</span></a>'
          document.getElementById("teamList").appendChild(div); 
       }
 });
+	
 
 
 
-
-
+//once a team is selected, generate roster data
 function generateRoster(teamID){
-
+		var playerList = document.getElementById("main");
+	playerList.style.display='block';
 	var teamList2 = document.getElementById("teamList");
 	teamList2.style.display='none';
 
@@ -39,6 +42,11 @@ function generateRoster(teamID){
 	.then(response => {
 	    return response.json().then(data => data.teams[0].roster.roster);
 	}).then(teams => {
+
+	      div = document.createElement("div");
+	      div.innerHTML=div.innerHTML + '<a href="javascript:hideRoster();" class="list-group-item small"></span><span class="glyphicon glyphicon-chevron-left"></span>' + 'go back:  </a>'
+	      document.getElementById("main").appendChild(div);
+
 	      for(team of teams) {
 	         const {jerseyNumber, person:{fullName, link}, position:{name}} = team;
 
@@ -59,14 +67,20 @@ function generateRoster(teamID){
 	               document.getElementById("main").appendChild(div);
 	            });
 	      }
+
+
 	});
 
-
-
-
-
-
 };
+
+
+function hideRoster(){
+	var playerList = document.getElementById("main");
+	playerList.innerHTML="";
+	var teamList = document.getElementById("teamList");
+	teamList.style.display='block';
+	};
+
 
 </script>
 
