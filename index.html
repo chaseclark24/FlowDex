@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
-
+divName=1
 //request data for team listing
 fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 .then(response => {
@@ -24,9 +24,10 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 	               //console.log(JSON.stringify(teamStats.stat.wins))
 	                div = document.createElement("div");
 	                url = "./dexCheck.html?" + id
-         			div.innerHTML='<a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span align="right" class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a>'
+	                //divName=1
+         			div.innerHTML='<div id = "'+divName+'"><a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span align="right" class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a></div>'
          			document.getElementById("teamList").appendChild(div); 
-
+         			divName=divName+1
 	            })
 
 
