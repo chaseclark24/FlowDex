@@ -44,7 +44,7 @@ function generateRoster(teamID){
 	}).then(teams => {
 
 	      div = document.createElement("div");
-	      div.innerHTML=div.innerHTML + '<a href="javascript:hideRoster();" class="list-group-item small"></span><span class="glyphicon glyphicon-chevron-left"></span>' + 'go back:  </a>'
+	      div.innerHTML=div.innerHTML + '<a href="javascript:hideRoster();" class="list-group-item small"></span><span class="glyphicon glyphicon-chevron-left"></span>' + 'go back  </a>'
 	      document.getElementById("main").appendChild(div);
 
 	      for(team of teams) {
