@@ -36,27 +36,27 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
                		   div = document.createElement("div");
                			div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
                			div.innerHTML=div.innerHTML 
-               				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Age: ' +currentAge 
-               				+ ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Height: ' + height 
-               				+ ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Weight: ' + weight 
-               				+' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
-               				+  'Nationality: '+ nationality 
-               				+' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+ 'Nationality: '+ nationality 
+               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Position: ' + name 
-               				+' </a></div><div class="col-xs-6"><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+ '</span></a></div><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Goals: ' + people.stat.goals
-               				+' </a> <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>'
+               				+' </span></a> <a class="list-group-item small"><span class="playerRow">'
                				+ 'Points: ' + people.stat.points
-               				+' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+' </span></a><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Hits: ' + people.stat.hits
-               				+' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' 
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
                				+ 'Penalty Minutes: ' + people.stat.penaltyMinutes
-               				+' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>'
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">'
                				+ 'Shots: ' + people.stat.shots
-               				+' </a></div></div></div></container>'
+               				+'</span></a></span></div></div></div></container>'
        
                			document.getElementById("main").appendChild(div);
                			divName=divName+1
