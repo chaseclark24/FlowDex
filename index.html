@@ -25,7 +25,7 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/')
 	                div = document.createElement("div");
 	                url = "./dexCheck.html?" + id
 	                //divName=1
-         			div.innerHTML='<div id = "'+divName+'"><a href='+url+' class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#menu">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span align="right" class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a></div>'
+         			div.innerHTML='<div id = "'+divName+'"><a href='+url+' class="list-group-item">' + name +'<span class="label label-default"> W:'+teamStats.stat.wins + '</span><span align="right" class="label label-default"> L:' + teamStats.stat.losses+ '</span></span></a></div>'
          			document.getElementById("teamList").appendChild(div); 
          			divName=divName+1
 	            })

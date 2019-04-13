@@ -3,16 +3,17 @@ p {
 	font-size: 28px;
 }
 
-.main
+.main 
 {
-	font-size: 23px;
+	font-size: calc(1.5vw + 1.5vh + 1vmin);
 	overflow: hidden;
 }
 
 
 .teamList
 {
-	font-size: 23px;
+	font-size: calc(1.5vw + 1.5vh + 1vmin);
+	overflow: hidden;
 }
 
 .label-default
