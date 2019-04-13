@@ -37,25 +37,25 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
                			div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
                			div.innerHTML=div.innerHTML 
                				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Age: ' +currentAge 
-               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Height: ' + height 
-               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Weight: ' + weight 
-               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Nationality: '+ nationality 
-               				+ '</span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Position: ' + name 
-               				+ '</span></a></div><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Goals: ' + people.stat.goals
-               				+' </span></a> <a class="list-group-item small"><span class="playerRow">'
-               				+ 'Points: ' + people.stat.points
-               				+' </span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Hits: ' + people.stat.hits
+               				+'<b>Age </b>' +currentAge 
                				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
-               				+ 'Penalty Minutes: ' + people.stat.penaltyMinutes
+               				+'<b>Height </b>' + height 
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Weight </b>' + weight 
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Nationality </b>'+ nationality 
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Position </b>' + name 
+               				+'</span></a></div><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Goals </b>' + people.stat.goals
+               				+' </span></a><a class="list-group-item small"><span class="playerRow">'
+               				+'<b>Points </b>' + people.stat.points
+               				+' </span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Hits </b>' + people.stat.hits
+               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'<b>Penalty Minutes </b>' + people.stat.penaltyMinutes
                				+'</span></a><a class="list-group-item small"><span class="playerRow">'
-               				+ 'Shots: ' + people.stat.shots
+               				+'<b>Shots </b>' + people.stat.shots
                				+'</span></a></span></div></div></div></container>'
        
                			document.getElementById("main").appendChild(div);
