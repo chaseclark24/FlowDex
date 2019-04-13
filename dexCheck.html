@@ -21,9 +21,6 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
             .then(res => {
                 return res.json().then(data => data.people[0]);
             }).then(people => {
-               const {currentAge, height, weight, nationality} = people;
-               // Rest of the code. Create div elements.. 
-               // console.log(`Age: ${currentAge}, Height: ${height}, Weight: ${weight}, Nationality: ${nationality}, Num: ${jerseyNumber}, Name: ${fullName}, Position: ${name}`);
 			   return people;
             }).then(people => {
             	const {currentAge, height, weight, nationality, fullName} = people;
@@ -31,32 +28,30 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
                 .then(res => {
                 	return res.json().then(data => data.stats[0].splits[0]);
                 	}).then(people => {
-               			//console.log(name)
-               			startRow='<div class="row"><div class="col-xs-6"><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>'
-               		   div = document.createElement("div");
+               		    div = document.createElement("div");
                			div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
                			div.innerHTML=div.innerHTML 
-               				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
+               				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Age </b>' +currentAge 
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Height </b>' + height 
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Weight </b>' + weight 
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Nationality </b>'+ nationality 
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Position </b>' + name 
-               				+'</span></a></div><div class="col-xs-6"><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p></div><div class="col-xs-6"><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Goals </b>' + people.stat.goals
-               				+' </span></a><a class="list-group-item small"><span class="playerRow">'
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">'
                				+'<b>Points </b>' + people.stat.points
-               				+' </span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Hits </b>' + people.stat.hits
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">' 
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Penalty Minutes </b>' + people.stat.penaltyMinutes
-               				+'</span></a><a class="list-group-item small"><span class="playerRow">'
+               				+'</span></p><p class="list-group-item small"><span class="playerRow">'
                				+'<b>Shots </b>' + people.stat.shots
-               				+'</span></a></span></div></div></div></container>'
+               				+'</span></p></span></div></div></div></container>'
        
                			document.getElementById("main").appendChild(div);
                			divName=divName+1

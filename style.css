@@ -6,6 +6,7 @@ p {
 .main
 {
 	font-size: 23px;
+	overflow: hidden;
 }
 
 
@@ -26,3 +27,5 @@ p {
 
 	font-size: 15px;
 }
+
+
