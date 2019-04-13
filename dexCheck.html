@@ -22,16 +22,23 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
                 return res.json().then(data => data.people[0]);
             }).then(people => {
                const {currentAge, height, weight, nationality} = people;
-
                // Rest of the code. Create div elements.. 
-              // console.log(`Age: ${currentAge}, Height: ${height}, Weight: ${weight}, Nationality: ${nationality}, Num: ${jerseyNumber}, Name: ${fullName}, Position: ${name}`);
-               div = document.createElement("div");
-               div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
-               div.innerHTML=div.innerHTML + '<div id="'+divName+'" class="collapse"><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Weight: ' + weight + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' +  'Nationality: '+ nationality + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Position: ' + name + ' </a> </div></div></container>'
+               // console.log(`Age: ${currentAge}, Height: ${height}, Weight: ${weight}, Nationality: ${nationality}, Num: ${jerseyNumber}, Name: ${fullName}, Position: ${name}`);
+			   return people;
+            }).then(people => {
+            	const {currentAge, height, weight, nationality, fullName} = people;
+				fetch('https://statsapi.web.nhl.com' + link + '/stats/?stats=statsSingleSeason&season=20182019')
+                .then(res => {
+                	return res.json().then(data => data.stats[0].splits[0]);
+                	}).then(people => {
+               			console.log(name)
+               		   div = document.createElement("div");
+               			div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
+               			div.innerHTML=div.innerHTML + '<div id="'+divName+'" class="collapse"><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Age: ' +currentAge + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Height: ' + height + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Weight: ' + weight + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' +  'Nationality: '+ nationality + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Position: ' + name + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Goals: ' + people.stat.goals + ' </a> <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Points: ' + people.stat.points + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Hits: ' + people.stat.hits + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Penalty Minutes: ' + people.stat.penaltyMinutes + ' </a><a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span>' + 'Shots: ' + people.stat.shots + ' </a></div></div></container>'
        
-               document.getElementById("main").appendChild(div);
-               divName=divName+1
-
+               			document.getElementById("main").appendChild(div);
+               			divName=divName+1
+           			});
 
             });
       }
