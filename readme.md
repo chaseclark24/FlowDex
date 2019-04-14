@@ -1,6 +1,6 @@
 ## FlowDex  
 
-Do you ever want to know more information about the players in a hockey game? FlowDex was built to aggregate player information and stats in a simple, mobile-friendly interface.
+Have you ever wanted to know more information about the players in a hockey game? FlowDex was built to aggregate player information and stats in a simple, mobile-friendly interface.
 
 Take a look at FlowDex here - https://chaseclark24.github.io/FlowDex/. 
 
