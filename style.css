@@ -1,7 +1,3 @@
-p {
-
-	font-size: 28px;
-}
 
 .main 
 {
@@ -29,4 +25,15 @@ p {
 	font-size: 15px;
 }
 
+#main .list-group-item:focus
+{
+	outline: none;
+}
 
+#main .div{
+
+	outline: none;
+	background-color: red;
+}
+}
+.a:focus { outline: none }
