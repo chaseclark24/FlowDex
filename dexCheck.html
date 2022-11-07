@@ -24,7 +24,7 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
 			   return people;
             }).then(people => {
             	const {currentAge, height, weight, nationality, fullName} = people;
-				fetch('https://statsapi.web.nhl.com' + link + '/stats/?stats=statsSingleSeason&season=20182019')
+				fetch('https://statsapi.web.nhl.com' + link + '/stats/?stats=statsSingleSeason&season=20222023')
                 .then(res => {
                 	return res.json().then(data => data.stats[0].splits[0]);
                 	}).then(people => {
