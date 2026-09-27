@@ -8,27 +8,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
 divName=1
+const api = url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
 //request data for team listing
-fetch('https://statsapi.web.nhl.com/api/v1/teams/')
+fetch(api('https://api-web.nhle.com/v1/standings/now'))
 .then(response => {
-    return response.json().then(data => data.teams);
+    return response.json().then(data => data.standings);
 }).then(teams => {
       for(team of teams) {
-      	const {id, name} = team
-      	var teamList2 = document.getElementById("teamList");
+		const {teamAbbrev, teamName, wins, losses} = team
+		const id = teamAbbrev.default
+		const name = teamName.default
+		var teamList2 = document.getElementById("teamList");
 		teamList2.style.display='block';
-	         fetch('https://statsapi.web.nhl.com/api/v1/teams/' + id + '/stats')
-	            .then(res => {
-	                return res.json().then(data => data.stats[0].splits[0]);
-	            }).then(teamStats => {
-	               //console.log(JSON.stringify(teamStats.stat.wins))
-	                div = document.createElement("div");
-	                url = "./dexCheck.html?" + id
-	                //divName=1
-         			div.innerHTML='<div id = "'+divName+'"><a href='+url+' class="list-group-item">' + name +'<span class="label label-default"> L:'+teamStats.stat.losses + '</span><span align="right" class="label label-default"> W:' + teamStats.stat.wins+ '</span></span></a></div>'
-         			document.getElementById("teamList").appendChild(div); 
-         			divName=divName+1
-	            })
+		div = document.createElement("div");
+		url = "./dexCheck.html?" + id
+		div.innerHTML='<div id = "'+divName+'"><a href='+url+' class="list-group-item">' + name +'<span class="label label-default"> L:'+losses + '</span><span align="right" class="label label-default"> W:' + wins+ '</span></span></a></div>'
+		document.getElementById("teamList").appendChild(div);
+		divName=divName+1
 
 
       }

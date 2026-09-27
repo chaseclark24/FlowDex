@@ -10,26 +10,24 @@
 var path = window.location.href;
 var teamID = path.split("?")[1]
 divName=1
-fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
-.then(response => {
-    return response.json().then(data => data.teams[0].roster.roster);
-}).then(teams => {
+const api = url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+Promise.all([
+    fetch(api('https://api-web.nhle.com/v1/roster/'+teamID+'/current')).then(response => response.json()),
+    fetch(api('https://api-web.nhle.com/v1/club-stats/'+teamID+'/now')).then(response => response.json())
+]).then(([roster, clubStats]) => {
+      const teams = [...roster.forwards, ...roster.defensemen, ...roster.goalies]
+      const playerStats = [...clubStats.skaters, ...clubStats.goalies]
       for(team of teams) {
-         const {jerseyNumber, person:{fullName, link}, position:{name}} = team;
-
-         fetch('https://statsapi.web.nhl.com' + link)
-            .then(res => {
-                return res.json().then(data => data.people[0]);
-            }).then(people => {
-			   return people;
-            }).then(people => {
-            	const {currentAge, height, weight, nationality, fullName} = people;
-				fetch('https://statsapi.web.nhl.com' + link + '/stats/?stats=statsSingleSeason&season=20222023')
-                .then(res => {
-                	return res.json().then(data => data.stats[0].splits[0]);
-                	}).then(people => {
-               		    div = document.createElement("div");
-               			div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + jerseyNumber + '</span></a>'
+		 const {id, sweaterNumber, firstName, lastName, positionCode, heightInInches, weightInPounds, birthDate, birthCountry} = team;
+		 const fullName = firstName.default + ' ' + lastName.default
+		 const birth = new Date(birthDate + 'T00:00:00')
+		 const today = new Date()
+		 const currentAge = today.getFullYear() - birth.getFullYear() - (today < new Date(today.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0)
+		 const height = Math.floor(heightInInches / 12) + "' " + (heightInInches % 12) + '"'
+		 const weight = weightInPounds + ' lb'
+		 const people = playerStats.find(player => player.playerId === id) || {}
+		 div = document.createElement("div");
+		 div.innerHTML='<a class="list-group-item" data-toggle="collapse" data-target="#'+divName+'" >' + fullName + ' <span class="label label-default" >#' + (sweaterNumber ?? '—') + '</span></a>'
                			div.innerHTML=div.innerHTML 
                				+'<div id="'+divName+'" class="collapse"><div class="row"><div class="col-xs-6"><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Age </b>' +currentAge 
@@ -38,26 +36,23 @@ fetch('https://statsapi.web.nhl.com/api/v1/teams/'+teamID+'?expand=team.roster')
                				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
                				+'<b>Weight </b>' + weight 
                				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
-               				+'<b>Nationality </b>'+ nationality 
+					+'<b>Nationality </b>'+ birthCountry
                				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
-               				+'<b>Position </b>' + name 
+					+'<b>Position </b>' + positionCode
                				+'</span></p></div><div class="col-xs-6"><p class="list-group-item small"><span class="playerRow">' 
-               				+'<b>Goals </b>' + people.stat.goals
+					+'<b>Goals </b>' + (people.goals ?? 0)
                				+'</span></p><p class="list-group-item small"><span class="playerRow">'
-               				+'<b>Points </b>' + people.stat.points
+					+'<b>Points </b>' + (people.points ?? 0)
                				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
-               				+'<b>Hits </b>' + people.stat.hits
+					+'<b>Assists </b>' + (people.assists ?? 0)
                				+'</span></p><p class="list-group-item small"><span class="playerRow">' 
-               				+'<b>Penalty Minutes </b>' + people.stat.penaltyMinutes
+					+'<b>Penalty Minutes </b>' + (people.penaltyMinutes ?? 0)
                				+'</span></p><p class="list-group-item small"><span class="playerRow">'
-               				+'<b>Shots </b>' + people.stat.shots
+					+'<b>Shots </b>' + (people.shots ?? people.shotsAgainst ?? 0)
                				+'</span></p></span></div></div></div></container>'
        
                			document.getElementById("main").appendChild(div);
                			divName=divName+1
-           			});
-
-            });
       }
 });
 </script>
