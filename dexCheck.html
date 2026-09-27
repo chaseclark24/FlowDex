@@ -10,7 +10,7 @@
 var path = window.location.href;
 var teamID = path.split("?")[1]
 divName=1
-const api = url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+const api = url => 'https://corsmirror.onrender.com/v1/cors?url=' + encodeURIComponent(url)
 Promise.all([
     fetch(api('https://api-web.nhle.com/v1/roster/'+teamID+'/current')).then(response => response.json()),
     fetch(api('https://api-web.nhle.com/v1/club-stats/'+teamID+'/now')).then(response => response.json())
